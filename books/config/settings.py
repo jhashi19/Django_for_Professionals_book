@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'crispy_forms',
     'accounts',
     'pages',
 ]
@@ -127,7 +128,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# URL we can use to reference static files
 STATIC_URL = '/static/'
+
+# static files in local development
+STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
+
+# static files for production
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+
+STATICFILES_FINDERS = [
+    # look within the STATICFILES_DIRS
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    # look for any directories named 'static' located within an app
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
